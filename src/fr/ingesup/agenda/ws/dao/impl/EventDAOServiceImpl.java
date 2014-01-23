@@ -39,8 +39,7 @@ public class EventDAOServiceImpl implements DAOService {
 		{
 			String id=((Event) obj).getId();
 			Event e=EventSerializer.getEvent(id);
-			EventSerializer.removeEvent(e);
-			EventSerializer.addEvent((Event) obj);
+			EventSerializer.replaceEvent(e, (Event) obj);
 			
 		}
 
