@@ -1,15 +1,17 @@
-
 package fr.ingesup.agenda.ws.models;
 
 import java.io.Serializable;
 
-public class Event implements Serializable{
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+public abstract class Event implements Serializable{
 	protected Type type;
 	
 	public enum Type {
 		TASK, MEETING, DAY, PERIOD
 	}
-
+	
 	protected String id;
 	protected String name;
 	protected String description;

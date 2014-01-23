@@ -5,6 +5,14 @@ public class Day extends Event {
 		this.type = Type.DAY;
 	}
 	
+	public Day(Date date) {
+		super();
+		this.type = Type.DAY;
+		this.date = date;
+	}
+
+
+
 	private Date date;
 
 	public Date getDate() {
