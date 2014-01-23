@@ -1,0 +1,84 @@
+package fr.ingesup.agenda.ws.utils;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.ws.rs.core.Response.Status;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import fr.ingesup.agenda.ws.exceptions.JsonException;
+
+public class JSONUtils {
+	public static JSONObject getJSONObjectFromString(String jsonStr)
+	{
+		JSONObject jsonObject = null;
+		try{
+			jsonObject = new JSONObject(jsonStr);
+			return jsonObject;
+		} catch(JSONException e)
+		{
+			return null;
+		}
+		
+	}
+	
+	public static JSONArray getJSONArray(JSONObject uniqueJSONObject)
+	{
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.put(uniqueJSONObject);
+		
+		return jsonArray;
+	}
+	
+	public static JSONArray getJSONArray(List<JSONObject> allJSONObjects)
+	{
+		JSONArray jsonArray = new JSONArray();
+		
+		for(JSONObject obj : allJSONObjects) {
+			jsonArray.put(obj);
+		}
+		
+		return jsonArray;
+	}
+	
+	public static <T> JSONArray convertListToJSON(List<T> jsonList) throws JsonException {
+		JSONArray array = new JSONArray();
+		for(T obj : jsonList) {
+			array.put(convertObjectToJSON(obj));
+		}
+		return array;
+	}
+	
+	public static <T> T convertJSONToObject(String json, Class<T> clasz) throws JsonException {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.readValue(json, clasz);
+		} catch (JsonParseException e) {
+			throw new JsonException("Json is malformed : " + json, Status.NOT_FOUND);
+		} catch (JsonMappingException e) {
+			throw new JsonException("Json is well-formed but not valid : " + json, Status.NOT_ACCEPTABLE);
+		} catch (IOException e) {
+			throw new JsonException("Internal servor error", Status.SERVICE_UNAVAILABLE);
+		}
+	}
+	
+	public static <T> String convertObjectToJSON(T object) throws JsonException {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(object);
+		} catch (JsonGenerationException e) {
+			throw new JsonException("Json could not be generated from object", Status.BAD_REQUEST);
+		} catch (JsonMappingException e) {
+			throw new JsonException("Object could not be mapped", Status.BAD_REQUEST);
+		} catch (IOException e) {
+			throw new JsonException("I/O exception", Status.SERVICE_UNAVAILABLE);
+		}
+	}
+}

@@ -1,4 +1,4 @@
-package fr.ingesup.agenda.ws.dao;
+package fr.ingesup.agenda.ws.exceptions;
 
 public class DAOException extends Exception {
 	
