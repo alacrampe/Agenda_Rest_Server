@@ -1,21 +1,16 @@
 package fr.ingesup.agenda.ws.models;
 
+import java.util.List;
+
 import fr.ingesup.agenda.ws.models.Event.Type;
 
 public class WSEventsInput {
-	private String userToken;
 	private Date dateBegin;
 	private Date dateEnd;
 	private Time timeBegin;
 	private Time timeEnd;
-	private Type eventType;
+	private List<Type> eventTypes;
 	
-	public String getUserToken() {
-		return userToken;
-	}
-	public void setUserToken(String userToken) {
-		this.userToken = userToken;
-	}
 	public Date getDateBegin() {
 		return dateBegin;
 	}
@@ -40,10 +35,10 @@ public class WSEventsInput {
 	public void setTimeEnd(Time timeEnd) {
 		this.timeEnd = timeEnd;
 	}
-	public Type getEventType() {
-		return eventType;
+	public List<Type> getEventTypes() {
+		return eventTypes;
 	}
-	public void setEventType(Type eventType) {
-		this.eventType = eventType;
+	public void setEventTypes(List<Type> eventTypes) {
+		this.eventTypes = eventTypes;
 	}
 }

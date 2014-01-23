@@ -2,8 +2,6 @@ package fr.ingesup.agenda.ws.dao.impl;
 
 import java.util.List;
 
-
-
 import fr.ingesup.agenda.ws.dao.DAOService;
 import fr.ingesup.agenda.ws.exceptions.DAOException;
 import fr.ingesup.agenda.ws.models.Event;
