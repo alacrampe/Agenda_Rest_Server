@@ -1,9 +1,15 @@
+
 package fr.ingesup.agenda.ws.dao;
 
+import java.util.List;
+
+import fr.ingesup.agenda.ws.exceptions.DAOException;
+
 public interface DAOService {
-	public void getAll(Class objClass) throws DAOException;
-	public void save(Object o) throws DAOException;
-	public void get(String id) throws DAOException;
-	public void update(Object o) throws DAOException;
+	public <T> List<T> getAll(Class<T> objClass) throws DAOException;
+	public <T> void save(T obj) throws DAOException;
+	public <T> T get(String id) throws DAOException;
+	public <T> void update(T obj) throws DAOException;
 	public void delete(String id) throws DAOException;
+
 }
