@@ -13,6 +13,7 @@ public class Event implements Serializable{
 	protected String name;
 	protected String description;
 	protected Periodicity periodicity;
+	protected User user;
 	
 	public Type getType() {
 		return type;
@@ -43,5 +44,11 @@ public class Event implements Serializable{
 	}
 	public void setPeriodicity(Periodicity periodicity) {
 		this.periodicity = periodicity;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
