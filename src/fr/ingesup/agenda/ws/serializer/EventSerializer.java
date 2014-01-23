@@ -17,6 +17,23 @@ public class EventSerializer {
 		return events;
 	}
 	
+	public static Event getEvent(String id)
+	{
+		Event event=null;
+		boolean found=false;
+		int i=0;
+		
+		while(!found)
+		{
+			event=events.get(i);
+			if(event.getId()==id)
+			{
+				found=true;
+			}
+		}
+		return(event);
+	}
+	
 	public static void addEvent(Event ev)
 	{
 		events.add(ev);
