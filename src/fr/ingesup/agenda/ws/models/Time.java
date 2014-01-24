@@ -1,5 +1,7 @@
 package fr.ingesup.agenda.ws.models;
 
-public class Time {
+import java.io.Serializable;
+
+public class Time implements Serializable{
 
 }

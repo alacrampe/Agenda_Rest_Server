@@ -1,9 +1,9 @@
 package fr.ingesup.agenda.ws.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Periodicity {
-	private String id;
+public class Periodicity implements Serializable{
 	private Type type;
 	private List<Integer> weekDays;
 	private List<Integer> monthDays;
@@ -13,14 +13,6 @@ public class Periodicity {
 	
 	public enum Type {
 		WEEKDAY, MONTHDAY, YEARDAY, SPECIALDAY
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public Type getType() {

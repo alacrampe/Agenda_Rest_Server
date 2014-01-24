@@ -1,6 +1,8 @@
 package fr.ingesup.agenda.ws.models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 	private String id;
 	private String userToken;
 	private String email;
