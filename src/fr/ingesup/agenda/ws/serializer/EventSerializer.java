@@ -41,11 +41,11 @@ public class EventSerializer {
 		}
 	}
 	
-	public static void addEvent(Event ev)
+	public static String addEvent(Event ev)
 	{
 		if(events!=null)
 		{
-			if(events.size()<=0)
+			if(events.size()>0)
 			{
 				Event ev2=events.get(events.size()-1);
 				ev.setId(""+Integer.parseInt(ev2.getId())+1);
@@ -55,16 +55,27 @@ public class EventSerializer {
 				ev.setId("1");
 			}
 			events.add(ev);
+			return ev.getId();
+		}
+		else
+		{
+			return null;
 		}
 		
 		
 	}
-	public static void replaceEvent(Event former, Event newer)
+	public static Event replaceEvent(Event former, Event newer)
 	{
 		if(events!=null)
 		{
 			int i=events.indexOf(former);
 			events.set(i, newer);
+			
+			return newer;
+		}
+		else
+		{
+			return null;
 		}
 	}
 	public static void removeEvent(Event ev)
@@ -83,6 +94,10 @@ public class EventSerializer {
 			events=(ArrayList<Event>) ois.readObject();
 			ois.close();
 			fis.close();
+			if(events==null)
+			{
+				events=new ArrayList<Event>();
+			}
 		}
 		catch(Exception e)
 		{
@@ -101,7 +116,7 @@ public class EventSerializer {
 		}
 		catch(Exception ex)
 		{
-			
+			System.out.println(ex.getMessage());
 		}
 	}
 }
