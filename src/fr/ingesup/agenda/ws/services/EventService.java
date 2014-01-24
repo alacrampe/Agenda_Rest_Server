@@ -30,8 +30,8 @@ public class EventService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getEvents(String wsInputStr, @QueryParam(value="userToken") String userToken) {
 		try {
-			WSEventsInput wsInput = JSONUtils.convertJSONToObject(wsInputStr, WSEventsInput.class);
-			return Response.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(wsInput, userToken))).build();
+//			WSEventsInput wsInput = JSONUtils.convertJSONToObject(wsInputStr, WSEventsInput.class);
+			return Response.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(null, userToken))).build();
 		} catch (DAOException e) {
 			return Response.status(Status.SERVICE_UNAVAILABLE).build();
 		} catch (JsonException e) {
