@@ -2,7 +2,7 @@ package fr.ingesup.agenda.ws.models;
 
 public class Period extends Event {
 	public Period() {
-		this.type = Type.PERIOD;
+		this.type = Type.P;
 	}
 	
 	private Date dateBegin;

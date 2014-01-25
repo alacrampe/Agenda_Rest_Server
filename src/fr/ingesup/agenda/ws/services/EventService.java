@@ -19,9 +19,9 @@ import fr.ingesup.agenda.ws.dao.EventServiceDAOUtil;
 import fr.ingesup.agenda.ws.exceptions.DAOException;
 import fr.ingesup.agenda.ws.exceptions.JsonException;
 import fr.ingesup.agenda.ws.models.Event;
-import fr.ingesup.agenda.ws.models.WSEventsInput;
 import fr.ingesup.agenda.ws.utils.EventUtils;
 import fr.ingesup.agenda.ws.utils.JSONUtils;
+import fr.ingesup.agenda.ws.utils.Log;
 import fr.ingesup.agenda.ws.utils.URLUtils;
 
 @Path(URLUtils.SERVICE_EVENT_URL)
@@ -33,8 +33,10 @@ public class EventService {
 //			WSEventsInput wsInput = JSONUtils.convertJSONToObject(wsInputStr, WSEventsInput.class);
 			return Response.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(null, userToken))).build();
 		} catch (DAOException e) {
+			Log.error(e);
 			return Response.status(Status.SERVICE_UNAVAILABLE).build();
 		} catch (JsonException e) {
+			Log.error(e);
 			return Response.status(e.getStatusCode()).build();
 		}
 	}
@@ -49,8 +51,10 @@ public class EventService {
 			EventServiceDAOUtil.save(specificEvent);
 			return Response.ok().build();
 		} catch (JsonException e) {
+			Log.error(e);
 			return Response.status(e.getStatusCode()).build();
 		} catch (DAOException e) {
+			Log.error(e);
 			return Response.serverError().build();
 		}
 	}
@@ -63,8 +67,10 @@ public class EventService {
 			Event event = EventServiceDAOUtil.get(id);
 			return Response.ok(JSONUtils.convertObjectToJSON(event)).build();
 		} catch (DAOException e) {
+			Log.error(e);
 			return Response.serverError().build();
 		} catch (JsonException e) {
+			Log.error(e);
 			return Response.serverError().build();
 		}
 	}
@@ -80,8 +86,10 @@ public class EventService {
 			event = EventServiceDAOUtil.update(event);
 			return Response.ok(JSONUtils.convertObjectToJSON(event)).build();
 		} catch (DAOException e) {
+			Log.error(e);
 			return Response.serverError().build();
 		} catch (JsonException e) {
+			Log.error(e);
 			return Response.serverError().build();
 		}
 	}
@@ -94,6 +102,7 @@ public class EventService {
 			EventServiceDAOUtil.delete(id);
 			return Response.ok().build();
 		} catch (DAOException e) {
+			Log.error(e);
 			return Response.serverError().build();
 		}
 	}

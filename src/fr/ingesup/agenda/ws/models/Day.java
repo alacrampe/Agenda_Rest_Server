@@ -2,12 +2,12 @@ package fr.ingesup.agenda.ws.models;
 
 public class Day extends Event {
 	public Day() {
-		this.type = Type.DAY;
+		this.type = Type.D;
 	}
 	
 	public Day(Date date) {
 		super();
-		this.type = Type.DAY;
+		this.type = Type.D;
 		this.date = date;
 	}
 

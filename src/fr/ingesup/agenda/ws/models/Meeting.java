@@ -5,7 +5,7 @@ import java.util.List;
 public class Meeting extends Event {
 
 	public Meeting() {
-		this.type = Type.MEETING;
+		this.type = Type.M;
 	}
 	
 	private PointInTime pointBegin;
