@@ -18,38 +18,33 @@ public class EventSerializer {
 	
 	public static ArrayList<Event> getAll()
 	{
+		initIfNull();
 		return events;
 	}
 	
 	public static Event getEvent(String id)
 	{
-		if(events!=null)
+		initIfNull();
+		Event event=null;
+		boolean found=false;
+		int i=0;
+		
+		while(!found)
 		{
-			Event event=null;
-			boolean found=false;
-			int i=0;
-			
-			while(!found)
+			event=events.get(i);
+			if(event.getId()==id)
 			{
-				event=events.get(i);
-				if(event.getId()==id)
-				{
-					found=true;
-				}
+				found=true;
 			}
-			return(event);
 		}
-		else
-		{
-			return null;
-		}
+		return(event);
+		
+		
 	}
 	
 	public static String addEvent(Event ev)
 	{
-		if(events == null) {
-			Load();
-		}
+		initIfNull();
 		if(events.size()>0)
 		{
 			Event ev2=events.get(events.size()-1);
@@ -60,27 +55,32 @@ public class EventSerializer {
 			ev.setId("1");
 		}
 		events.add(ev);
+		Save();
 		return ev.getId();
 	}
 	public static Event replaceEvent(Event former, Event newer)
 	{
-		if(events!=null)
-		{
-			int i=events.indexOf(former);
-			events.set(i, newer);
-			
-			return newer;
-		}
-		else
-		{
-			return null;
-		}
+		initIfNull();
+		
+		int i=events.indexOf(former);
+		events.set(i, newer);
+		Save();
+		return newer;
+		
 	}
 	public static void removeEvent(Event ev)
 	{
-		if(events!=null)
+		initIfNull();
+		events.remove(ev);
+		Save();
+
+	}
+	
+	public static void initIfNull()
+	{
+		if(events==null)
 		{
-			events.remove(ev);
+			Load();
 		}
 	}
 	
