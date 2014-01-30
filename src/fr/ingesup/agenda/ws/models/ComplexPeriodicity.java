@@ -1,6 +1,8 @@
 package fr.ingesup.agenda.ws.models;
 
-public class ComplexPeriodicity {
+import java.io.Serializable;
+
+public class ComplexPeriodicity implements Serializable{
 	private int day;
 	private int numberInMonth;
 	private int month;

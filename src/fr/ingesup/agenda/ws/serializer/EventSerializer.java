@@ -94,29 +94,30 @@ public class EventSerializer {
 			events=(ArrayList<Event>) ois.readObject();
 			ois.close();
 			fis.close();
-			if(events==null)
-			{
-				events=new ArrayList<Event>();
-			}
+			
 		}
 		catch(Exception e)
 		{
-			
+			events=new ArrayList<Event>();
+			System.out.println(e.getMessage());
 		}
 	}
 	
 	public static void Save()
 	{
-		try{
-			FileOutputStream fos=new FileOutputStream("events.ser");
-			ObjectOutputStream oos=new ObjectOutputStream(fos);
-			oos.writeObject(events);
-			oos.close();
-			fos.close();
-		}
-		catch(Exception ex)
+		if(events!=null)
 		{
-			System.out.println(ex.getMessage());
+			try{
+				FileOutputStream fos=new FileOutputStream("events.ser");
+				ObjectOutputStream oos=new ObjectOutputStream(fos);
+				oos.writeObject(events);
+				oos.close();
+				fos.close();
+			}
+			catch(Exception ex)
+			{
+				System.out.println(ex.getMessage());
+			}
 		}
 	}
 }
