@@ -3,7 +3,7 @@ package fr.ingesup.agenda.ws.models;
 public class Task extends Event {
 	
 	public Task() {
-		this.type = Type.TASK;
+		this.type = Type.T;
 	}
 	
 	private PointInTime pointBegin;

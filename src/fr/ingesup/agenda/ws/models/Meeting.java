@@ -1,3 +1,4 @@
+
 package fr.ingesup.agenda.ws.models;
 
 import java.util.List;
@@ -5,7 +6,7 @@ import java.util.List;
 public class Meeting extends Event {
 
 	public Meeting() {
-		this.type = Type.MEETING;
+		this.type = Type.M;
 	}
 	
 	private PointInTime pointBegin;
@@ -32,3 +33,4 @@ public class Meeting extends Event {
 	}
 	
 }
+

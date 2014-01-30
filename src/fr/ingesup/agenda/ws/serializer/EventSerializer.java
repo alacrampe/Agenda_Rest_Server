@@ -1,12 +1,16 @@
+
 package fr.ingesup.agenda.ws.serializer;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import fr.ingesup.agenda.ws.models.Event;
+import fr.ingesup.agenda.ws.utils.Log;
 
 public class EventSerializer {
 	
@@ -43,26 +47,20 @@ public class EventSerializer {
 	
 	public static String addEvent(Event ev)
 	{
-		if(events!=null)
+		if(events == null) {
+			Load();
+		}
+		if(events.size()>0)
 		{
-			if(events.size()>0)
-			{
-				Event ev2=events.get(events.size()-1);
-				ev.setId(""+Integer.parseInt(ev2.getId())+1);
-			}
-			else
-			{
-				ev.setId("1");
-			}
-			events.add(ev);
-			return ev.getId();
+			Event ev2=events.get(events.size()-1);
+			ev.setId(""+Integer.parseInt(ev2.getId())+1);
 		}
 		else
 		{
-			return null;
+			ev.setId("1");
 		}
-		
-		
+		events.add(ev);
+		return ev.getId();
 	}
 	public static Event replaceEvent(Event former, Event newer)
 	{
@@ -94,30 +92,34 @@ public class EventSerializer {
 			events=(ArrayList<Event>) ois.readObject();
 			ois.close();
 			fis.close();
-			
+			if(events==null)
+			{
+				events=new ArrayList<Event>();
+			}
 		}
-		catch(Exception e)
+		catch(FileNotFoundException e)
 		{
+			Log.error(e);
 			events=new ArrayList<Event>();
-			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			Log.error(e);
+		} catch (ClassNotFoundException e) {
+			Log.error(e);
 		}
 	}
 	
 	public static void Save()
 	{
-		if(events!=null)
+		try{
+			FileOutputStream fos=new FileOutputStream("events.ser");
+			ObjectOutputStream oos=new ObjectOutputStream(fos);
+			oos.writeObject(events);
+			oos.close();
+			fos.close();
+		}
+		catch(Exception ex)
 		{
-			try{
-				FileOutputStream fos=new FileOutputStream("events.ser");
-				ObjectOutputStream oos=new ObjectOutputStream(fos);
-				oos.writeObject(events);
-				oos.close();
-				fos.close();
-			}
-			catch(Exception ex)
-			{
-				System.out.println(ex.getMessage());
-			}
+			Log.error(ex);
 		}
 	}
 }

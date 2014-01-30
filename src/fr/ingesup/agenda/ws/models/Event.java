@@ -5,11 +5,11 @@ import java.io.Serializable;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public abstract class Event implements Serializable{
+public class Event implements Serializable{
 	protected Type type;
 	
 	public enum Type {
-		TASK, MEETING, DAY, PERIOD
+		T, M, D, P
 	}
 	
 	protected String id;
