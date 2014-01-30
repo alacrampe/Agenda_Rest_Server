@@ -1,14 +1,8 @@
 package fr.ingesup.agenda.ws.dao.impl;
 
-import java.util.List;
-
-import fr.ingesup.agenda.ws.dao.EventServiceDAO;
 import fr.ingesup.agenda.ws.dao.UserServiceDAO;
 import fr.ingesup.agenda.ws.exceptions.DAOException;
-import fr.ingesup.agenda.ws.models.Event;
 import fr.ingesup.agenda.ws.models.User;
-import fr.ingesup.agenda.ws.models.WSEventsInput;
-import fr.ingesup.agenda.ws.serializer.EventSerializer;
 import fr.ingesup.agenda.ws.serializer.UserSerializer;
 
 public class UserServiceDAOImpl implements UserServiceDAO {

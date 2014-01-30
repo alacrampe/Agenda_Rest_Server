@@ -17,35 +17,33 @@ public class UserSerializer {
 	
 	public static ArrayList<User> getAll()
 	{
+		initIfNull();
 		return users;
 	}
 	
 	public static User getUser(String id)
 	{
-		if(users!=null)
+		initIfNull();
+		User event=null;
+		boolean found=false;
+		int i=0;
+		
+		while(!found)
 		{
-			User event=null;
-			boolean found=false;
-			int i=0;
-			
-			while(!found)
+			event=users.get(i);
+			if(event.getId()==id)
 			{
-				event=users.get(i);
-				if(event.getId()==id)
-				{
-					found=true;
-				}
+				found=true;
 			}
-			return(event);
 		}
-		else
-		{
-			return null;
-		}
+		return(event);
+		
+		
 	}
 	
 	public static String addUser(User ev)
 	{
+		initIfNull();
 		if(users == null) {
 			Load();
 		}
@@ -59,27 +57,30 @@ public class UserSerializer {
 			ev.setId("1");
 		}
 		users.add(ev);
+		Save();
 		return ev.getId();
 	}
 	public static User replaceUser(User former, User newer)
 	{
-		if(users!=null)
-		{
-			int i=users.indexOf(former);
-			users.set(i, newer);
-			
-			return newer;
-		}
-		else
-		{
-			return null;
-		}
+		initIfNull();
+		
+		int i=users.indexOf(former);
+		users.set(i, newer);
+		Save();
+		return newer;
 	}
 	public static void removeUser(User ev)
 	{
-		if(users!=null)
+		initIfNull();
+		users.remove(ev);
+		Save();
+	}
+	
+	public static void initIfNull()
+	{
+		if(users==null)
 		{
-			users.remove(ev);
+			Load();
 		}
 	}
 	
