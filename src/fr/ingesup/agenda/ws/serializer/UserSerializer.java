@@ -28,13 +28,14 @@ public class UserSerializer {
 		boolean found=false;
 		int i=0;
 		
-		while(!found)
+		while(!found && i<users.size())
 		{
 			event=users.get(i);
 			if(event.getId()==id)
 			{
 				found=true;
 			}
+			i++;
 		}
 		return(event);
 		
