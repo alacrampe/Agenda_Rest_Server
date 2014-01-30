@@ -29,6 +29,13 @@ public class JSONUtils {
 		
 	}
 	
+	public static JSONObject getJSONObjectFromKeyValue(String key, String value) throws JSONException
+	{
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(key, value);
+		return jsonObject;
+	}
+	
 	public static JSONArray getJSONArray(JSONObject uniqueJSONObject)
 	{
 		JSONArray jsonArray = new JSONArray();
