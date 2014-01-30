@@ -31,7 +31,9 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 	@Override
 	public Event update(Event event) throws DAOException {
 		// TODO Implementation
-		return null;
+		Event e=EventSerializer.getEvent(event.getId());
+		EventSerializer.replaceEvent(e, event);
+		return EventSerializer.getEvent(event.getId());
 	}
 
 	@Override

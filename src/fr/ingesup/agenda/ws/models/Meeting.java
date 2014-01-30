@@ -1,3 +1,4 @@
+
 package fr.ingesup.agenda.ws.models;
 
 import java.util.List;
@@ -32,3 +33,4 @@ public class Meeting extends Event {
 	}
 	
 }
+

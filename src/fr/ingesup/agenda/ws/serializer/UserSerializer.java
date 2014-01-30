@@ -1,4 +1,3 @@
-
 package fr.ingesup.agenda.ws.serializer;
 
 import java.io.FileInputStream;
@@ -9,29 +8,29 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import fr.ingesup.agenda.ws.models.Event;
+import fr.ingesup.agenda.ws.models.User;
 import fr.ingesup.agenda.ws.utils.Log;
 
-public class EventSerializer {
+public class UserSerializer {
 	
-	public static ArrayList<Event> events;
+	public static ArrayList<User> users;
 	
-	public static ArrayList<Event> getAll()
+	public static ArrayList<User> getAll()
 	{
-		return events;
+		return users;
 	}
 	
-	public static Event getEvent(String id)
+	public static User getUser(String id)
 	{
-		if(events!=null)
+		if(users!=null)
 		{
-			Event event=null;
+			User event=null;
 			boolean found=false;
 			int i=0;
 			
 			while(!found)
 			{
-				event=events.get(i);
+				event=users.get(i);
 				if(event.getId()==id)
 				{
 					found=true;
@@ -45,29 +44,29 @@ public class EventSerializer {
 		}
 	}
 	
-	public static String addEvent(Event ev)
+	public static String addUser(User ev)
 	{
-		if(events == null) {
+		if(users == null) {
 			Load();
 		}
-		if(events.size()>0)
+		if(users.size()>0)
 		{
-			Event ev2=events.get(events.size()-1);
+			User ev2=users.get(users.size()-1);
 			ev.setId(""+Integer.parseInt(ev2.getId())+1);
 		}
 		else
 		{
 			ev.setId("1");
 		}
-		events.add(ev);
+		users.add(ev);
 		return ev.getId();
 	}
-	public static Event replaceEvent(Event former, Event newer)
+	public static User replaceUser(User former, User newer)
 	{
-		if(events!=null)
+		if(users!=null)
 		{
-			int i=events.indexOf(former);
-			events.set(i, newer);
+			int i=users.indexOf(former);
+			users.set(i, newer);
 			
 			return newer;
 		}
@@ -76,31 +75,31 @@ public class EventSerializer {
 			return null;
 		}
 	}
-	public static void removeEvent(Event ev)
+	public static void removeUser(User ev)
 	{
-		if(events!=null)
+		if(users!=null)
 		{
-			events.remove(ev);
+			users.remove(ev);
 		}
 	}
 	
 	public static void Load()
 	{
 		try{
-			FileInputStream fis=new FileInputStream("events.ser");
+			FileInputStream fis=new FileInputStream("users.ser");
 			ObjectInputStream ois=new ObjectInputStream(fis);
-			events=(ArrayList<Event>) ois.readObject();
+			users=(ArrayList<User>) ois.readObject();
 			ois.close();
 			fis.close();
-			if(events==null)
+			if(users==null)
 			{
-				events=new ArrayList<Event>();
+				users=new ArrayList<User>();
 			}
 		}
 		catch(FileNotFoundException e)
 		{
 			Log.error(e);
-			events=new ArrayList<Event>();
+			users=new ArrayList<User>();
 			Save();
 			Load();
 		} catch (IOException e) {
@@ -113,9 +112,9 @@ public class EventSerializer {
 	public static void Save()
 	{
 		try{
-			FileOutputStream fos=new FileOutputStream("events.ser");
+			FileOutputStream fos=new FileOutputStream("users.ser");
 			ObjectOutputStream oos=new ObjectOutputStream(fos);
-			oos.writeObject(events);
+			oos.writeObject(users);
 			oos.close();
 			fos.close();
 		}
