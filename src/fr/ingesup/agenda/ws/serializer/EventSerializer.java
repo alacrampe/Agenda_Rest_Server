@@ -29,13 +29,14 @@ public class EventSerializer {
 		boolean found=false;
 		int i=0;
 		
-		while(!found)
+		while(!found && i<events.size())
 		{
 			event=events.get(i);
 			if(event.getId()==id)
 			{
 				found=true;
 			}
+			i++;
 		}
 		return(event);
 		
