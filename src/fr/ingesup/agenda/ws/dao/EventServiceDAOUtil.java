@@ -21,8 +21,8 @@ public class EventServiceDAOUtil {
 		return getService().getAllEvents(filter, userToken);
 	}
 	
-	public static String save(Event event) throws DAOException {
-		return getService().save(event);
+	public static String save(Event event, String token) throws DAOException {
+		return getService().save(event, token);
 	}
 	
 	public static Event get(String id) throws DAOException {
