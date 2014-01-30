@@ -49,7 +49,7 @@ public class EventSerializer {
 		if(events.size()>0)
 		{
 			Event ev2=events.get(events.size()-1);
-			ev.setId(""+Integer.parseInt(ev2.getId())+1);
+			ev.setId(""+(Integer.parseInt(ev2.getId())+1));
 		}
 		else
 		{

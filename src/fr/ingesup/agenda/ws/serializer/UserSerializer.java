@@ -24,20 +24,20 @@ public class UserSerializer {
 	public static User getUser(String id)
 	{
 		initIfNull();
-		User event=null;
+		User user=null;
 		boolean found=false;
 		int i=0;
 		
 		while(!found && i<users.size())
 		{
-			event=users.get(i);
-			if(event.getId()==id)
+			user=users.get(i);
+			if(user.getId()==id)
 			{
 				found=true;
 			}
 			i++;
 		}
-		return(event);
+		return(user);
 		
 		
 	}
@@ -51,7 +51,7 @@ public class UserSerializer {
 		if(users.size()>0)
 		{
 			User ev2=users.get(users.size()-1);
-			ev.setId(""+Integer.parseInt(ev2.getId())+1);
+			ev.setId(""+(Integer.parseInt(ev2.getId())+1));
 		}
 		else
 		{
