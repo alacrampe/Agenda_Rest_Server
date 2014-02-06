@@ -16,6 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.codehaus.jettison.json.JSONException;
+
 import fr.ingesup.agenda.ws.dao.EventServiceDAOUtil;
 import fr.ingesup.agenda.ws.exceptions.DAOException;
 import fr.ingesup.agenda.ws.exceptions.JsonException;
@@ -29,7 +31,7 @@ import fr.ingesup.agenda.ws.utils.URLUtils;
 public class EventService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getEvents(String wsInputStr, @QueryParam(value="userToken") String userToken) {
+	public Response getEvents(@QueryParam(value="userToken") String userToken) {
 		try {
 //			WSEventsInput wsInput = JSONUtils.convertJSONToObject(wsInputStr, WSEventsInput.class);
 			return Response.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(null, userToken))).build();
@@ -39,6 +41,9 @@ public class EventService {
 		} catch (JsonException e) {
 			Log.error(e);
 			return Response.status(e.getStatusCode()).build();
+		} catch (JSONException e) {
+			Log.error(e);
+			return Response.status(Status.SERVICE_UNAVAILABLE).build();
 		}
 	}
 	

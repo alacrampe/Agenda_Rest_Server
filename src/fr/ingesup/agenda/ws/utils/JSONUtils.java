@@ -55,10 +55,10 @@ public class JSONUtils {
 		return jsonArray;
 	}
 	
-	public static <T> JSONArray convertListToJSON(List<T> jsonList) throws JsonException {
+	public static <T> JSONArray convertListToJSON(List<T> jsonList) throws JsonException, JSONException {
 		JSONArray array = new JSONArray();
 		for(T obj : jsonList) {
-			array.put(convertObjectToJSON(obj));
+			array.put(new JSONObject(convertObjectToJSON(obj)));
 		}
 		return array;
 	}

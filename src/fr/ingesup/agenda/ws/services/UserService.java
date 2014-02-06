@@ -1,5 +1,6 @@
 package fr.ingesup.agenda.ws.services;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.ws.rs.Consumes;
@@ -63,12 +64,14 @@ public class UserService {
 			user.setUserToken(StringUtils.MD5Hash(user.getEmail()));
 			user.setPassword("********");
 			System.out.println("Generating user token : " + user.getUserToken());
-//			int insertedId = UserCRUDService.save(user);
-//			return Response.created(new URI(String.valueOf(insertedId))).build();
-			return Response.ok().build();
+			user = UserServiceDAOUtil.createAccount(user);
+			return Response.created(new URI(user.getId())).build();
 		} catch (JsonException e) {
 			Log.error(e);
 			return Response.status(e.getStatusCode()).build();
+		} catch (Exception e) {
+			Log.error(e);
+			return Response.serverError().build();
 		}
 	}
 }

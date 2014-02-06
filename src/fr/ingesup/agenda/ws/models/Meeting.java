@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Meeting extends Event {
 
+	private static final long serialVersionUID = 1L;
+
 	public Meeting() {
 		this.type = Type.M;
 	}

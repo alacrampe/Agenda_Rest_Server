@@ -2,6 +2,8 @@ package fr.ingesup.agenda.ws.models;
 
 public class Task extends Event {
 	
+	private static final long serialVersionUID = 1L;
+
 	public Task() {
 		this.type = Type.T;
 	}

@@ -26,21 +26,15 @@ public class EventSerializer {
 	{
 		initIfNull();
 		Event event=null;
-		boolean found=false;
 		int i=0;
 		
-		while(!found && i<events.size())
+		while(event == null && i<events.size())
 		{
-			event=events.get(i);
-			if(event.getId()==id)
-			{
-				found=true;
-			}
+			if(events.get(i).getId().equals(id))
+				event = events.get(i);
 			i++;
 		}
 		return(event);
-		
-		
 	}
 	
 	public static String addEvent(Event ev)
@@ -88,7 +82,7 @@ public class EventSerializer {
 	public static void Load()
 	{
 		try{
-			FileInputStream fis=new FileInputStream("events.ser");
+			FileInputStream fis=new FileInputStream("events2.ser");
 			ObjectInputStream ois=new ObjectInputStream(fis);
 			events=(ArrayList<Event>) ois.readObject();
 			ois.close();
@@ -114,7 +108,7 @@ public class EventSerializer {
 	public static void Save()
 	{
 		try{
-			FileOutputStream fos=new FileOutputStream("events.ser");
+			FileOutputStream fos=new FileOutputStream("events2.ser");
 			ObjectOutputStream oos=new ObjectOutputStream(fos);
 			oos.writeObject(events);
 			oos.close();

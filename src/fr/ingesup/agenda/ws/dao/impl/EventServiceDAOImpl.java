@@ -18,7 +18,6 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 
 	@Override
 	public String save(Event event) throws DAOException {
-//		return EventSerializer.addEvent(event);
 		EventSerializer.addEvent(event);
 		return "OK";
 	}

@@ -25,21 +25,15 @@ public class UserSerializer {
 	{
 		initIfNull();
 		User user=null;
-		boolean found=false;
 		int i=0;
 		
-		while(!found && i<users.size())
+		while(user == null && i<users.size())
 		{
-			user=users.get(i);
-			if(user.getId()==id)
-			{
-				found=true;
+			if(users.get(i).getId().equals(id)) {
+				user = users.get(i);
 			}
-			i++;
 		}
 		return(user);
-		
-		
 	}
 	
 	public static String addUser(User ev)
