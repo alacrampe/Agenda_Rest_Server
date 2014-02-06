@@ -10,7 +10,7 @@ public interface EventServiceDAO {
 	public List<Event> getAllEvents(WSEventsInput filter, String userToken) throws DAOException;
 	
 	/** @return the event id */
-	public String save(Event event) throws DAOException;
+	public String save(Event event, String token) throws DAOException;
 	public Event get(String id) throws DAOException;
 	public Event update(Event event) throws DAOException;
 	public void delete(String id) throws DAOException;

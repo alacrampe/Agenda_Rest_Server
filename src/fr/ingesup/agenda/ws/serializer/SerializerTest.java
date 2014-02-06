@@ -50,7 +50,7 @@ public class SerializerTest {
 //		
 //		System.out.println(EventSerializer.getAll().get(0).getDescription());
 //		System.out.println(EventSerializer.getAll().get(1).getDescription());
-		
+/*		
 		Day day=new Day();
 		day.setDate(new Date(01, 05, 2013));
 		day.setDescription("Le 1er mai est un jour férié français");
@@ -62,13 +62,13 @@ public class SerializerTest {
 		m.setParticipants(Arrays.asList(new String[] {"olivier", "daniel", "xavier", "samuel", "arnaud"}));
 		m.setPointBegin(new PointInTime(2013, 01, 30, 16, 30));
 		try {
-			EventServiceDAOUtil.save(day);
-			EventServiceDAOUtil.save(m);
+			//EventServiceDAOUtil.save(day);
+			//EventServiceDAOUtil.save(m);
 //			Meeting meeting = (Meeting) EventServiceDAOUtil.get("2");
 //			System.out.println(meeting.toString());
 		} catch (DAOException e) {
 			Log.error(e);
-		}
+		}*/
 	}
 
 }

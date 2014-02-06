@@ -29,8 +29,8 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 		ArrayList<Event> evs=EventSerializer.getAll();
 		ArrayList<Event> filteredList=new ArrayList<Event>();
 		
-		DateTime fB=new DateTime(filter.getDateBegin().getYear(),filter.getDateBegin().getMonth(),filter.getDateBegin().getDay(), filter.getTimeBegin().getHour(), filter.getTimeBegin().getMinutes());
-		DateTime fE=new DateTime(filter.getDateEnd().getYear(),filter.getDateEnd().getMonth(),filter.getDateEnd().getDay(), filter.getTimeEnd().getHour(), filter.getTimeEnd().getMinutes());
+		DateTime fB=new DateTime(filter.getDateBegin().getYear(),filter.getDateBegin().getMonth(),filter.getDateBegin().getDay(), filter.getTimeBegin().getHour(), filter.getTimeBegin().getMinute());
+		DateTime fE=new DateTime(filter.getDateEnd().getYear(),filter.getDateEnd().getMonth(),filter.getDateEnd().getDay(), filter.getTimeEnd().getHour(), filter.getTimeEnd().getMinute());
 		
 		Interval per = new Interval(fB, fE);
 		
@@ -72,12 +72,12 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 						Date da=((Meeting) r).getPointBegin().getDate();
 						Time ti=((Meeting) r).getPointBegin().getTime();
 						
-						DateTime d= new DateTime(da.getYear(), da.getMonth(), da.getDay(), ti.getHour(), ti.getMinutes());
+						DateTime d= new DateTime(da.getYear(), da.getMonth(), da.getDay(), ti.getHour(), ti.getMinute());
 						
 						Date da2=((Meeting) r).getPointBegin().getDate();
 						Time ti2=((Meeting) r).getPointBegin().getTime();
 						
-						DateTime d2= new DateTime(da2.getYear(), da2.getMonth(), da2.getDay(), ti2.getHour(), ti2.getMinutes());
+						DateTime d2= new DateTime(da2.getYear(), da2.getMonth(), da2.getDay(), ti2.getHour(), ti2.getMinute());
 						
 						Interval meeting=new Interval(d, d2);
 						
@@ -91,12 +91,12 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 						Date da=((Task) r).getPointBegin().getDate();
 						Time ti=((Task) r).getPointBegin().getTime();
 						
-						DateTime d= new DateTime(da.getYear(), da.getMonth(), da.getDay(), ti.getHour(), ti.getMinutes());
+						DateTime d= new DateTime(da.getYear(), da.getMonth(), da.getDay(), ti.getHour(), ti.getMinute());
 						
 						Date da2=((Task) r).getPointBegin().getDate();
 						Time ti2=((Task) r).getPointBegin().getTime();
 						
-						DateTime d2= new DateTime(da2.getYear(), da2.getMonth(), da2.getDay(), ti2.getHour(), ti2.getMinutes());
+						DateTime d2= new DateTime(da2.getYear(), da2.getMonth(), da2.getDay(), ti2.getHour(), ti2.getMinute());
 						
 						Interval meeting=new Interval(d, d2);
 						

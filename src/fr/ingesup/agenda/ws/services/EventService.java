@@ -54,7 +54,7 @@ public class EventService {
 		try {
 			Event event = JSONUtils.convertJSONToObject(eventStr, Event.class);
 			Event specificEvent = JSONUtils.convertJSONToObject(eventStr, EventUtils.getEventClassFromType(event.getType()));
-			EventServiceDAOUtil.save(specificEvent);
+			EventServiceDAOUtil.save(specificEvent, userToken);
 			return Response.ok().build();
 		} catch (JsonException e) {
 			Log.error(e);
