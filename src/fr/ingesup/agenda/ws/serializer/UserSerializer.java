@@ -35,6 +35,26 @@ public class UserSerializer {
 		}
 		return(user);
 	}
+	public static User getUserByToken(String token)
+	{
+		initIfNull();
+		User user=null;
+		boolean found=false;
+		int i=0;
+		
+		while(!found && i<users.size())
+		{
+			user=users.get(i);
+			if(user.getUserToken()==token)
+			{
+				found=true;
+			}
+			i++;
+		}
+		return(user);
+		
+		
+	}
 	
 	public static String addUser(User ev)
 	{

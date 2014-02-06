@@ -1,6 +1,8 @@
 package fr.ingesup.agenda.ws.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -12,7 +14,6 @@ public class Event implements Serializable{
 	public enum Type {
 		T, M, D, P
 	}
-	
 	protected String id;
 	protected String name;
 	protected String description;
@@ -54,5 +55,10 @@ public class Event implements Serializable{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public ArrayList<Event> generateRepeats()
+	{
+		return null;
 	}
 }
