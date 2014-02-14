@@ -32,6 +32,7 @@ public class UserSerializer {
 			if(users.get(i).getId().equals(id)) {
 				user = users.get(i);
 			}
+			i++;
 		}
 		return(user);
 	}

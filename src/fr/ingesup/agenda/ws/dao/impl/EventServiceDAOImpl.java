@@ -12,6 +12,7 @@ import fr.ingesup.agenda.ws.exceptions.DAOException;
 import fr.ingesup.agenda.ws.models.Date;
 import fr.ingesup.agenda.ws.models.Day;
 import fr.ingesup.agenda.ws.models.Event;
+import fr.ingesup.agenda.ws.models.Event.Type;
 import fr.ingesup.agenda.ws.models.Meeting;
 import fr.ingesup.agenda.ws.models.Period;
 import fr.ingesup.agenda.ws.models.Task;
@@ -34,6 +35,40 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 		
 		Interval per = new Interval(fB, fE);
 		
+		boolean includeDays=false;
+		boolean includePeriods=false;
+		boolean includeTasks=false;
+		boolean includeMeetings=false;
+		
+		if(filter.getEventTypes().size()<=0)
+		{
+			includeDays=true;
+			includePeriods=true;
+			includeTasks=true;
+			includeMeetings=true;
+		}
+		else
+		{
+			for(Event.Type type : filter.getEventTypes())
+			{
+				if(type==Type.D)
+				{
+					includeDays=true;
+				}
+				else if(type==Type.M)
+				{
+					includeMeetings=true;
+				}
+				else if(type==Type.P)
+				{
+					includePeriods=true;
+				}
+				else if(type==Type.T)
+				{
+					includeTasks=true;
+				}
+			}
+		}
 		for(Event e : evs)
 		{
 			if(e.getUser().getUserToken().equals(userToken))
@@ -42,7 +77,7 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 				
 				for(Event r : repeats)
 				{
-					if(r.getClass().equals(Day.class))
+					if(r.getClass().equals(Day.class) && includeDays)
 					{
 						Date da=((Day) r).getDate();
 						DateTime d=new DateTime(da.getYear(),da.getMonth(),da.getDay(), 0 , 0);
@@ -54,7 +89,7 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 							filteredList.add(r);
 						}
 					}
-					else if(r.getClass().equals(Period.class))
+					else if(r.getClass().equals(Period.class) && includePeriods)
 					{
 						Date da=((Period) r).getDateBegin();
 						DateTime d=new DateTime(da.getYear(),da.getMonth(),da.getDay(), 0 , 0);
@@ -67,7 +102,7 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 							filteredList.add(r);
 						}
 					}
-					else if(r.getClass().equals(Meeting.class))
+					else if(r.getClass().equals(Meeting.class) && includeMeetings)
 					{
 						Date da=((Meeting) r).getPointBegin().getDate();
 						Time ti=((Meeting) r).getPointBegin().getTime();
@@ -86,7 +121,7 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 							filteredList.add(r);
 						}
 					}
-					else if(r.getClass().equals(Task.class))
+					else if(r.getClass().equals(Task.class) && includeTasks)
 					{
 						Date da=((Task) r).getPointBegin().getDate();
 						Time ti=((Task) r).getPointBegin().getTime();
