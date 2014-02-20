@@ -34,7 +34,9 @@ public class EventService {
 	public Response getEvents(@QueryParam(value="userToken") String userToken) {
 		try {
 //			WSEventsInput wsInput = JSONUtils.convertJSONToObject(wsInputStr, WSEventsInput.class);
-			return Response.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(null, userToken))).build();
+			return Response
+					.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(null, userToken)))
+					.build();
 		} catch (DAOException e) {
 			Log.error(e);
 			return Response.status(Status.SERVICE_UNAVAILABLE).build();
