@@ -20,6 +20,7 @@ import fr.ingesup.agenda.ws.models.User;
 import fr.ingesup.agenda.ws.models.WSEventsInput;
 import fr.ingesup.agenda.ws.serializer.EventSerializer;
 import fr.ingesup.agenda.ws.serializer.UserSerializer;
+import fr.ingesup.agenda.ws.utils.Validator;
 
 public class EventServiceDAOImpl implements EventServiceDAO {
 
@@ -29,8 +30,27 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 		ArrayList<Event> evs=EventSerializer.getAll();
 		ArrayList<Event> filteredList=new ArrayList<Event>();
 		
-		DateTime fB=new DateTime(filter.getDateBegin().getYear(),filter.getDateBegin().getMonth(),filter.getDateBegin().getDay(), filter.getTimeBegin().getHour(), filter.getTimeBegin().getMinute());
-		DateTime fE=new DateTime(filter.getDateEnd().getYear(),filter.getDateEnd().getMonth(),filter.getDateEnd().getDay(), filter.getTimeEnd().getHour(), filter.getTimeEnd().getMinute());
+		DateTime fB=null;
+		DateTime fE=null;
+		if(Validator.isNull(filter.getDateBegin())) {
+			fB = new DateTime(System.currentTimeMillis());
+		}
+		else if(Validator.isNull(filter.getTimeBegin())) {
+			fB = new DateTime(filter.getDateBegin().getYear(),filter.getDateBegin().getMonth(),filter.getDateBegin().getDay(), 12, 0);
+		}
+		else {
+			fB = new DateTime(filter.getDateBegin().getYear(),filter.getDateBegin().getMonth(),filter.getDateBegin().getDay(), filter.getTimeBegin().getHour(), filter.getTimeBegin().getMinute());
+		}
+		if(Validator.isNull(filter.getDateEnd())) {
+			fE = new DateTime(System.currentTimeMillis());
+		}
+		else if(Validator.isNull(filter.getDateEnd())) {
+			fE = new DateTime(filter.getDateEnd().getYear(),filter.getDateEnd().getMonth(),filter.getDateEnd().getDay(), 12, 0);
+		}
+		else {
+			fE = new DateTime(filter.getDateEnd().getYear(),filter.getDateEnd().getMonth(),filter.getDateEnd().getDay(), filter.getTimeEnd().getHour(), filter.getTimeEnd().getMinute());
+		}
+		
 		
 		Interval per = new Interval(fB, fE);
 		
@@ -39,7 +59,7 @@ public class EventServiceDAOImpl implements EventServiceDAO {
 		boolean includeTasks=false;
 		boolean includeMeetings=false;
 		
-		if(filter.getEventTypes().size()<=0)
+		if(Validator.isNull(filter.getEventTypes()) || filter.getEventTypes().size()<=0)
 		{
 			includeDays=true;
 			includePeriods=true;

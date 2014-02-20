@@ -22,6 +22,7 @@ import fr.ingesup.agenda.ws.dao.EventServiceDAOUtil;
 import fr.ingesup.agenda.ws.exceptions.DAOException;
 import fr.ingesup.agenda.ws.exceptions.JsonException;
 import fr.ingesup.agenda.ws.models.Event;
+import fr.ingesup.agenda.ws.models.WSEventsInput;
 import fr.ingesup.agenda.ws.utils.EventUtils;
 import fr.ingesup.agenda.ws.utils.JSONUtils;
 import fr.ingesup.agenda.ws.utils.Log;
@@ -35,7 +36,7 @@ public class EventService {
 		try {
 //			WSEventsInput wsInput = JSONUtils.convertJSONToObject(wsInputStr, WSEventsInput.class);
 			return Response
-					.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(null, userToken)))
+					.ok(JSONUtils.convertListToJSON(EventServiceDAOUtil.getAllEvents(new WSEventsInput(), userToken)))
 					.build();
 		} catch (DAOException e) {
 			Log.error(e);
